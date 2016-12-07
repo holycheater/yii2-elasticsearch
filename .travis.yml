@@ -18,6 +18,9 @@ cache:
   directories:
     - $HOME/.composer/cache
 
+before_install:
+  - curl -O https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-5.0.2.deb && sudo dpkg -i --force-confnew elasticsearch-5.0.2.deb && sudo service elasticsearch restart
+
 install:
   - travis_retry composer self-update && composer --version
   - travis_retry composer global require "fxp/composer-asset-plugin:~1.1.1"
