@@ -3,7 +3,9 @@ machine:
         - docker
 
 dependencies:
+    pre:
+        - docker pull elasticsearch:5.0
     override:
         - composer global require "fxp/composer-asset-plugin:^1.1"
-        - composer install --no-interaction --prefer-dist
+        - composer install --prefer-dist --no-interaction
         - docker run -p 9200:9200 -d elasticsearch:5.0 -Etransport.host=127.0.0.1
