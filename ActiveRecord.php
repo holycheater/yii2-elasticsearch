@@ -425,7 +425,7 @@ class ActiveRecord extends BaseActiveRecord
         }
         $values = $this->getDirtyAttributes($attributes);
 
-        $options = $this->getPrimaryKey() !== null : [ 'op_type' => 'create' ] : [ ];
+        $options = $this->getPrimaryKey() !== null ? [ 'op_type' => 'create' ] : [ ];
 
         $response = static::getDb()->createCommand()->insert(
             static::index(),
