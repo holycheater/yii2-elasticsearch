@@ -76,13 +76,11 @@ class Customer extends ActiveRecord
     {
         $command->deleteMapping(static::index(), static::type());
         $command->setMapping(static::index(), static::type(), [
-            static::type() => [
-                "properties" => [
-                    "name" =>        ["type" => "string", "index" => "not_analyzed", "store" => true],
-                    "email" =>       ["type" => "string", "index" => "not_analyzed" ],
-                    "address" =>     ["type" => "string", "index" => "analyzed"],
-                    "status" => ["type" => "integer"],
-                ]
+            "properties" => [
+                "name" => ["type" => "keyword", "index" => "not_analyzed", "store" => true],
+                "email" => ["type" => "keyword", "index" => "not_analyzed", "store" => true],
+                "address" => ["type" => "text", "index" => "analyzed"],
+                "status" => ["type" => "integer"],
             ]
         ]);
 
