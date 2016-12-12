@@ -462,7 +462,7 @@ class Command extends Component
     {
         $body = $mapping !== null ? (is_string($mapping) ? $mapping : Json::encode($mapping)) : null;
 
-        return $this->db->put([$index, '_mapping', $type], $options, $body);
+        return $this->db->put([$index, $type, '_mapping' ], $options, $body);
     }
 
     /**
