@@ -409,47 +409,6 @@ class ActiveRecordTest extends TestCase
         $this->assertEquals([], $order->items);
     }
 
-    /**
-     * Some PDO implementations(e.g. cubrid) do not support boolean values.
-     * Make sure this does not affect AR layer.
-     */
-    public function testBooleanAttribute()
-    {
-        $db = $this->getConnection();
-        Customer::deleteAll();
-        Customer::setUpMapping($db->createCommand(), true);
-
-        $customerClass = $this->getCustomerClass();
-        $customer = new $customerClass();
-        $customer->name = 'boolean customer';
-        $customer->email = 'mail@example.com';
-        $customer->status = true;
-        $customer->save(false);
-
-        $customer->refresh();
-        $this->assertEquals(true, $customer->status);
-
-        $customer->status = false;
-        $customer->save(false);
-
-        $customer->refresh();
-        $this->assertEquals(false, $customer->status);
-
-        $customer = new Customer();
-        $customer->setAttributes(['email' => 'user2b@example.com', 'name' => 'user2b', 'status' => true], false);
-        $customer->save(false);
-        $customer = new Customer();
-        $customer->setAttributes(['email' => 'user3b@example.com', 'name' => 'user3b', 'status' => false], false);
-        $customer->save(false);
-        $this->afterSave();
-
-        $customers = Customer::find()->where(['status' => true])->all();
-        $this->assertEquals(1, count($customers));
-
-        $customers = Customer::find()->where(['status' => false])->all();
-        $this->assertEquals(2, count($customers));
-    }
-
     public function testScriptFields()
     {
         $orderItems = OrderItem::find()

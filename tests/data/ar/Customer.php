@@ -72,7 +72,7 @@ class Customer extends ActiveRecord
      * @param Command $command
      * @param boolean $statusIsBoolean
      */
-    public static function setUpMapping($command, $statusIsBoolean = false)
+    public static function setUpMapping($command)
     {
         $command->deleteMapping(static::index(), static::type());
         $command->setMapping(static::index(), static::type(), [
@@ -81,7 +81,7 @@ class Customer extends ActiveRecord
                     "name" =>        ["type" => "string", "index" => "not_analyzed", "store" => true],
                     "email" =>       ["type" => "string", "index" => "not_analyzed" ],
                     "address" =>     ["type" => "string", "index" => "analyzed"],
-                    "status" => $statusIsBoolean ? ["type" => "boolean"] : ["type" => "integer"],
+                    "status" => ["type" => "integer"],
                 ]
             ]
         ]);
