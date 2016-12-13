@@ -412,7 +412,7 @@ class ActiveRecordTest extends TestCase
     public function testScriptFields()
     {
         $orderItems = OrderItem::find()
-            ->storedFields('quantity', 'subtotal')
+            ->source('quantity', 'subtotal')
             ->scriptFields([
                 'total' => [
                     'script' => [
@@ -920,6 +920,10 @@ class ActiveRecordTest extends TestCase
 
         $this->assertFalse($customer->canGetProperty('non_existing_property'));
         $this->assertFalse($customer->canSetProperty('non_existing_property'));
+    }
+
+    public function testBooleanAttribute()
+    {
     }
 
     // TODO test AR with not mapped PK

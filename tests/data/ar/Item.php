@@ -29,7 +29,6 @@ class Item extends ActiveRecord
      */
     public static function setUpMapping($command)
     {
-        $command->deleteMapping(static::index(), static::type());
         $command->setMapping(static::index(), static::type(), [
             static::type() => [
                 "properties" => [
