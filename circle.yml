@@ -10,3 +10,7 @@ dependencies:
         - composer install --prefer-dist --no-interaction || composer install --prefer-dist --no-interaction
         - docker run -p 9200:9200 -d elasticsearch:5.0 -Etransport.host=127.0.0.1 -Ehttp.publish_host=127.0.0.1
         - sleep 10
+
+test:
+    override:
+        - phpunit --xml $CIRCLE_TEST_REPORTS/phpunit/junit.xml
