@@ -7,6 +7,9 @@ php:
   - 7.0
   - hhvm
 
+services:
+  - docker
+
 # faster builds on new travis setup not using sudo
 sudo: required
 
@@ -16,8 +19,9 @@ cache:
     - $HOME/.composer/cache
 
 before_install:
-  - curl -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.1.1.deb && sudo dpkg -i --force-confnew elasticsearch-5.1.1.deb
-  - sudo service elasticsearch start
+  - docker pull elasticsearch:5.1
+  - docker run -p 9200:9200 -d elasticsearch:5.1 -Etransport.host=127.0.0.1 -Ehttp.publish_host=127.0.0.1
+  - sleep 10
 
 install:
   - travis_retry composer self-update && composer --version
