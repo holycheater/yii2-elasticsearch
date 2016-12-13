@@ -187,6 +187,7 @@ class Connection extends Component
             if (!isset($node['http']['publish_address'])) {
                 unset($nodes[$key]);
             }
+            $node['http_address'] = $node['http']['publish_address'];
 
             //Protocol is not a standard ES node property, so we add it manually
             $node['protocol'] = $this->defaultProtocol;
