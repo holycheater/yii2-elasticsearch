@@ -13,4 +13,4 @@ dependencies:
 
 test:
     override:
-        - phpunit --xml $CIRCLE_TEST_REPORTS/phpunit/junit.xml
+        - phpunit --log-junit $CIRCLE_TEST_REPORTS/phpunit/junit.xml
