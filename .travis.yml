@@ -21,13 +21,12 @@ cache:
 before_install:
   - docker pull elasticsearch:5.1
   - docker run -p 9200:9200 -d elasticsearch:5.1 -Etransport.host=127.0.0.1 -Ehttp.publish_host=127.0.0.1
-  - sleep 10
 
 install:
   - travis_retry composer self-update && composer --version
   - travis_retry composer global require "fxp/composer-asset-plugin:~1.1.1"
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
-  - travis_retry composer install --prefer-dist --no-interaction
+  - travis_retry composer install --prefer-source --no-interaction
 
 before_script:
   - echo 'elasticsearch version ' && curl http://localhost:9200/
