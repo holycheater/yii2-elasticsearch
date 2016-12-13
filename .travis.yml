@@ -1,4 +1,3 @@
-sudo: required
 language: php
 
 php:
@@ -12,7 +11,7 @@ services:
   - elasticsearch
 
 # faster builds on new travis setup not using sudo
-sudo: false
+sudo: required
 
 # cache vendor dirs
 cache:
