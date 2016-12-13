@@ -80,7 +80,7 @@ class Customer extends ActiveRecord
                 "name" => ["type" => "keyword", "index" => "not_analyzed", "store" => true],
                 "email" => ["type" => "keyword", "index" => "not_analyzed", "store" => true],
                 "address" => ["type" => "text", "index" => "analyzed"],
-                "status" => ["type" => "integer"],
+                "status" => ["type" => "integer", "store" => true],
             ]
         ]);
 

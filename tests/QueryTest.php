@@ -25,7 +25,7 @@ class QueryTest extends TestCase
             'properties' => [
                 'name' => [ 'type' => 'keyword', 'store' => true ],
                 'email' => [ 'type' => 'keyword', 'store' => true ],
-                'status' => [ 'type' => 'integer' ],
+                'status' => [ 'type' => 'integer', 'store' => true ],
             ],
         ]);
 
