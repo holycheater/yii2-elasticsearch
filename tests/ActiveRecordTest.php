@@ -415,8 +415,10 @@ class ActiveRecordTest extends TestCase
             ->storedFields('quantity', 'subtotal')
             ->scriptFields([
                 'total' => [
-                    'script' => "doc['quantity'].value * doc['subtotal'].value",
-                    'lang' => 'groovy',
+                    'script' => [
+                        'lang' => 'painless',
+                        'inline' => "doc['quantity'].value * doc['subtotal'].value",
+                    ]
                 ]
             ])->all();
         $this->assertNotEmpty($orderItems);
@@ -501,7 +503,7 @@ class ActiveRecordTest extends TestCase
         // indexBy callable + asArray
         $customers = Customer::find()->indexBy(function ($customer) {
                     return $customer->id . '-' . $customer->name;
-                })->fields('id', 'name')->all();
+                })->storedFields('id', 'name')->all();
         $this->assertEquals(3, count($customers));
         $this->assertTrue($customers['1-user1'] instanceof $customerClass);
         $this->assertTrue($customers['2-user2'] instanceof $customerClass);
@@ -527,7 +529,7 @@ class ActiveRecordTest extends TestCase
     {
         /* @var $this TestCase|ActiveRecordTestTrait */
         // indexBy + asArray
-        $customers = Customer::find()->indexBy('name')->asArray()->fields('id', 'name')->all();
+        $customers = Customer::find()->indexBy('name')->asArray()->storedFields('id', 'name')->all();
         $this->assertEquals(3, count($customers));
         $this->assertArrayHasKey('id', $customers['user1']['fields']);
         $this->assertArrayHasKey('name', $customers['user1']['fields']);
@@ -548,7 +550,7 @@ class ActiveRecordTest extends TestCase
         // indexBy callable + asArray
         $customers = Customer::find()->indexBy(function ($customer) {
                     return reset($customer['fields']['id']) . '-' . reset($customer['fields']['name']);
-                })->asArray()->fields('id', 'name')->all();
+                })->asArray()->storedFields('id', 'name')->all();
         $this->assertEquals(3, count($customers));
         $this->assertArrayHasKey('id', $customers['1-user1']['fields']);
         $this->assertArrayHasKey('name', $customers['1-user1']['fields']);
