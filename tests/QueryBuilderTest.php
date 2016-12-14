@@ -223,6 +223,14 @@ class QueryBuilderTest extends TestCase
 
     public function testBuildInCondition()
     {
+        $db = $this->getConnection();
+        $qb = new QueryBuilder($db);
+
+        $expected = [
+            'terms' => ['foo' => ['bar1', 'bar2']],
+        ];
+        $result = $this->invokeMethod($qb, 'buildNotCondition', ['in','foo',['bar1','bar2']]);
+        $this->assertEquals($expected, $result);
     }
 
     public function invokeMethod($obj, $methodName, $args)
