@@ -196,10 +196,34 @@ class QueryBuilderTest extends TestCase
 
     public function testNotCondition()
     {
+        $titles = [
+            'Symfony2 is another framework',
+            'yii test',
+            'nonexistent',
+        ];
+        $result = (new Query)
+            ->from('yiitest', 'article')
+            ->where([
+                'not' => [
+                    [ 'in', 'title', $titles ]
+                ]
+            ])
+            ->search($this->getConnection());
+        $this->assertEquals(2, $result['hits']['total']);
     }
 
     public function testInCondition()
     {
+        $titles = [
+            'Symfony2 is another framework',
+            'yii test',
+            'nonexistent',
+        ];
+        $result = (new Query)
+            ->from('yiitest', 'article')
+            ->where([ 'in', 'title', $titles ])
+            ->search($this->getConnection());
+        $this->assertEquals(2, $result['hits']['total']);
     }
 
     public function testBuildNotCondition()
