@@ -217,7 +217,7 @@ class QueryBuilderTest extends TestCase
                 ],
             ]
         ];
-        $result = $this->invokeMethod($qb, 'buildNotCondition', $cond);
+        $result = $this->invokeMethod($qb, 'buildNotCondition', ['not',$cond]);
         $this->assertEquals($expected, $result);
     }
 
