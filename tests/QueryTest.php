@@ -194,8 +194,8 @@ class QueryTest extends TestCase
     public function testOrWhere() {
         $query = new Query;
         $query->where(1)
-            ->andWhere(2)
-            ->andWhere(3);
+            ->orWhere(2)
+            ->orWhere(3);
 
         $expected = [ 'or', 1, 2, 3 ];
         $this->assertEquals($expected, $query->where);
