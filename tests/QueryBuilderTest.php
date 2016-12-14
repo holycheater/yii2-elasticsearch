@@ -210,14 +210,14 @@ class QueryBuilderTest extends TestCase
         $cond = [ 'title' => 'xyz' ];
         $operands = [ $cond ];
 
-        $expect = [
+        $expected = [
             'bool' => [
                 'must_not' => [
                     'bool' => [ 'must' => [ ['term'=>['title'=>'xyz']] ] ],
                 ],
             ]
         ];
-        $result = $this->invokeMethod($qb, 'buildNotCondition', ['not',$cond]);
+        $result = $this->invokeMethod($qb, 'buildNotCondition', ['not',$operands]);
         $this->assertEquals($expected, $result);
     }
 
