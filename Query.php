@@ -698,7 +698,7 @@ class Query extends Component implements QueryInterface
     /**
      * @inheritdoc
      */
-    public function andWhere()
+    public function andWhere($condition)
     {
         if ($this->where === null) {
             $this->where = $condition;
@@ -713,7 +713,7 @@ class Query extends Component implements QueryInterface
     /**
      * @inheritdoc
      */
-    public function orWhere()
+    public function orWhere($condition)
     {
         if ($this->where === null) {
             $this->where = $condition;
