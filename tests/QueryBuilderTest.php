@@ -229,7 +229,10 @@ class QueryBuilderTest extends TestCase
         $expected = [
             'terms' => ['foo' => ['bar1', 'bar2']],
         ];
-        $result = $this->invokeMethod($qb, 'buildInCondition', ['in','foo',['bar1','bar2']]);
+        $result = $this->invokeMethod($qb, 'buildInCondition', [
+            'in',
+            ['foo',['bar1','bar2']]
+        ]);
         $this->assertEquals($expected, $result);
     }
 
