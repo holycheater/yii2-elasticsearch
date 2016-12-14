@@ -194,4 +194,42 @@ class QueryBuilderTest extends TestCase
         $this->assertEquals(2, $result['hits']['total']);
     }
 
+    public function testNotCondition()
+    {
+    }
+
+    public function testInCondition()
+    {
+    }
+
+    public function testBuildNotCondition()
+    {
+        $db = $this->getConnection();
+        $qb = new QueryBuilder($db);
+
+        $cond = [ 'title' => 'xyz' ];
+        $operands = [ $cond ];
+
+        $expect = [
+            'bool' => [
+                'must_not' => [
+                    'bool' => [ 'must' => [ ['term'=>['title'=>'xyz']] ] ],
+                ],
+            ]
+        ];
+        $result = $this->invokeMethod($qb, 'buildNotCondition', $cond);
+        $this->assertEquals($expected, $result);
+    }
+
+    public function testBuildInCondition()
+    {
+    }
+
+    public function invokeMethod($obj, $methodName, $args)
+    {
+        $reflection = new \ReflectionObject($obj);
+        $method = $reflection->getMethod($methodName);
+        $method->setAccessible(true);
+        return $method->invokeArgs($obj, $args);
+    }
 }
