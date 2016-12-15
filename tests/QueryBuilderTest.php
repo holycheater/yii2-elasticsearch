@@ -203,7 +203,7 @@ class QueryBuilderTest extends TestCase
         ];
         $result = (new Query)
             ->from('yiitest', 'article')
-            ->where([ 'not', [ 'in', 'title', $titles ] ])
+            ->where([ 'not', [ 'in', 'title.keyword', $titles ] ])
             ->search($this->getConnection());
         $this->assertEquals(2, $result['hits']['total']);
     }
@@ -217,7 +217,7 @@ class QueryBuilderTest extends TestCase
         ];
         $result = (new Query)
             ->from('yiitest', 'article')
-            ->where([ 'in', 'title', $titles ])
+            ->where([ 'in', 'title.keyword', $titles ])
             ->search($this->getConnection());
         $this->assertEquals(2, $result['hits']['total']);
     }
