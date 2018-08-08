@@ -4,6 +4,12 @@ Yii Framework 2 elasticsearch extension Change Log
 2.0.5 under development
 -----------------------
 
+- Bug #180: Fixed `count()` compatibility with PHP 7.2 to not call it on scalar values (cebe)
+
+
+2.0.5 March 20, 2018
+--------------------
+
 - Bug #120: Fix debug panel markup to be compatible with Yii 2.0.10 (drdim)
 - Bug: Updated debug panel classes to be consistent with yii 2.0.7 (beowulfenator)
 - Enh #15: Special data provider `yii\elasticsearch\ActiveDataProvider` created (klimov-paul)
